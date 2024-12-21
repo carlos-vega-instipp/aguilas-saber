@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesión - Escuela</title>
+  <!-- Incluir Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Incluir Font Awesome para los íconos -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Incluir Google Fonts (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Incluir CSS externo -->
+  <link href="../../static/styles/styles.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="login-container p-4 shadow rounded-3">
+      <!-- Logo de la escuela arriba -->
+      <div class="text-center mb-4">
+        <img src="../../static/img/fondo_aguilas_saber.png" alt="Logo de la escuela" class="img-fluid" style="max-width: 150px;">
+      </div>
+      <h2 class="text-center mb-4">
+        Iniciar Sesión
+      </h2>
+      <form id="loginForm" action="#" method="POST" onsubmit="return redirectToHomePage()">
+        <div class="mb-3">
+          <input type="text" name="usuario" class="form-control" placeholder="Nombre de usuario" required>
+        </div>
+        <div class="mb-3 position-relative">
+          <input type="password" name="contraseña" id="contraseña" class="form-control" placeholder="Contraseña" required>
+          <span id="toggle-password" class="position-absolute top-50 end-0 translate-middle-y pe-3" style="cursor: pointer;">
+            <i class="fas fa-eye-slash"></i> <!-- Ícono por defecto de ojo cerrado -->
+          </span>
+        </div>
+        <button type="submit" class="btn btn-danger w-100">Iniciar sesión</button>
+      </form>
+      <div class="footer text-center mt-3">
+        <p><a href="#" data-bs-toggle="modal" data-bs-target="#recoverPasswordModal">¿Olvidaste tu contraseña?</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de recuperación de contraseña -->
+  <div class="modal fade" id="recoverPasswordModal" tabindex="-1" aria-labelledby="recoverPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="recoverPasswordModalLabel">Recuperar Contraseña</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form action="#" method="POST">
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input type="email" name="email" class="form-control" id="email" placeholder="Ingresa tu correo" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Recuperar contraseña</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Incluir los scripts de Bootstrap y Font Awesome -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Script para mostrar/ocultar la contraseña -->
+  <script>
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordField = document.getElementById('contraseña');
+
+    togglePassword.addEventListener('click', function() {
+      const type = passwordField.type === 'password' ? 'text' : 'password';
+      passwordField.type = type;
+
+      // Cambiar el ícono según el estado de la contraseña
+      this.innerHTML = type === 'password' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+    });
+
+    // Redirigir a la página de inicio del sistema al hacer clic en "Ingresar"
+    function redirectToHomePage() {
+      // Aquí puedes agregar validación de usuario si es necesario.
+      window.location.href = '../pagina_inicio/home.html'; // Redirige a la página de inicio.
+      return false; // Prevenir el envío del formulario
+    }
+  </script>
+</body>
+</html>

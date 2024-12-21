@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Roles</title>
+    <title>Gestión de Préstamos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../static/styles/styles.css">
@@ -22,7 +22,6 @@
                         <i class="fas fa-home me-2"></i>Inicio
                     </a>
                 </li>
-
                 <!-- Administracion con Collapse -->
                 <li class="nav-item">
                     <a href="#adminSubmenu" class="nav-link text-white d-flex align-items-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="adminSubmenu">
@@ -41,7 +40,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/prestamos/prestamos.html" class="nav-link text-white d-flex align-items-center">
                                     <i class="fas fa-archive me-2"></i>Préstamos
                                 </a>
                             </li>
@@ -50,7 +49,6 @@
                                     <i class="fas fa-undo me-2"></i>Devoluciones
                                 </a>
                             </li>
-                            <!-- Productos dentro de Administracion -->
                             <li class="nav-item">
                                 <a href="../../paginas/productos/listado-productos.html" class="nav-link text-white d-flex align-items-center">
                                     <i class="fas fa-shopping-cart me-2"></i>Productos
@@ -66,51 +64,71 @@
 
         <!-- Main Content -->
         <div class="flex-grow-1 p-4 bg-light">
-            <h1 class="h4 mb-2">Gestión de Roles</h1>
+            <h1 class="h4 mb-2">Gestión de Préstamos</h1>
             <hr style="margin: 0.5rem 0; border: 1px solid rgba(0, 0, 0, 0.1); box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-            <p class="mt-1">Llenar los campos para registrar o editar roles</p>
-            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#roleModal">Agregar Rol</button>
-            
-            <!-- Modal para Agregar o Editar Rol -->
-            <div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
+            <p class="mt-1">Registrar y gestionar préstamos de artículos</p>
+            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#loanModal">Registrar Préstamo</button>
+
+            <!-- Modal para Registrar Préstamo -->
+            <div class="modal fade" id="loanModal" tabindex="-1" aria-labelledby="loanModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="roleModalLabel">Agregar Rol</h5>
+                            <h5 class="modal-title" id="loanModalLabel">Registrar Préstamo</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="roleForm">
+                            <form id="loanForm">
                                 <div class="mb-3">
-                                    <label for="roleName" class="form-label">Nombre del Rol</label>
-                                    <input type="text" class="form-control" id="roleName" required>
+                                    <label for="borrowerName" class="form-label">Nombre del Solicitante</label>
+                                    <input type="text" class="form-control" id="borrowerName" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="roleDescription" class="form-label">Descripción</label>
-                                    <textarea class="form-control" id="roleDescription" rows="3" required></textarea>
+                                    <label for="articleType" class="form-label">Tipo de Artículo</label>
+                                    <select class="form-select" id="articleType" required>
+                                        <option value="">Seleccione...</option>
+                                        <option value="Libro">Libro</option>
+                                        <option value="Revista">Revista</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="articleTitle" class="form-label">Artículo</label>
+                                    <input type="text" class="form-control" id="articleTitle" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loanDate" class="form-label">Fecha de Préstamo</label>
+                                    <input type="date" class="form-control" id="loanDate" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="returnDate" class="form-label">Fecha de Devolución</label>
+                                    <input type="date" class="form-control" id="returnDate" required>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" id="saveRoleBtn">Guardar</button>
+                            <button type="button" class="btn btn-primary" id="saveLoanBtn">Guardar</button>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
                         <th>#</th>
-                        <th>Nombre del Rol</th>
-                        <th>Descripción</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Solicitante</th>
+                        <th>Tipo</th>
+                        <th>Artículo</th>
+                        <th>Fecha de Préstamo</th>
+                        <th>Fecha de Devolución</th>
+                        <th>Estado</th>
+                        <th>Marcar como Devuelto</th>
                     </tr>
                 </thead>
-                <tbody id="roleTableBody">
-                    <!-- Los roles agregados aparecerán aquí -->
+                <tbody id="loanTableBody">
+                    <!-- Los préstamos registrados aparecerán aquí -->
                 </tbody>
             </table>
         </div>
@@ -123,67 +141,44 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let editingRoleRow = null; // Para almacenar la fila que estamos editando
+        // Funcionalidades para gestionar préstamos
+        document.getElementById('saveLoanBtn').addEventListener('click', function() {
+            const borrowerName = document.getElementById('borrowerName').value;
+            const articleType = document.getElementById('articleType').value;
+            const articleTitle = document.getElementById('articleTitle').value;
+            const loanDate = document.getElementById('loanDate').value;
+            const returnDate = document.getElementById('returnDate').value;
 
-        // Función para agregar o editar rol
-        document.getElementById('saveRoleBtn').addEventListener('click', function() {
-            const roleName = document.getElementById('roleName').value;
-            const roleDescription = document.getElementById('roleDescription').value;
+            if (borrowerName && articleType && articleTitle && loanDate && returnDate) {
+                const tableBody = document.getElementById('loanTableBody');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${tableBody.rows.length + 1}</td>
+                    <td>${borrowerName}</td>
+                    <td>${articleType}</td>
+                    <td>${articleTitle}</td>
+                    <td>${loanDate}</td>
+                    <td>${returnDate}</td>
+                    <td>Activo</td>
+                    <td><button class="btn btn-primary btn-sm return-btn"><i class="fas fa-check"></i></button></td>
+                `;
+                tableBody.appendChild(newRow);
 
-            if (roleName && roleDescription) {
-                const tableBody = document.getElementById('roleTableBody');
-                if (editingRoleRow) {
-                    // Si estamos editando, actualizamos la fila
-                    editingRoleRow.cells[1].innerText = roleName;
-                    editingRoleRow.cells[2].innerText = roleDescription;
-                    editingRoleRow = null; // Restablecer fila en edición
-                } else {
-                    // Si no estamos editando, agregamos una nueva fila
-                    const newRow = document.createElement('tr');
-                    newRow.innerHTML = `
-                        <td>${tableBody.rows.length + 1}</td>
-                        <td>${roleName}</td>
-                        <td>${roleDescription}</td>
-                        <td><button class="btn btn-success btn-sm edit-btn"><i class="fas fa-edit"></i></button></td>
-                        <td><button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i></button></td>
-                    `;
-                    tableBody.appendChild(newRow);
-                }
-
-                // Cerrar el modal después de agregar o actualizar
-                document.getElementById('roleForm').reset();
-                const modal = bootstrap.Modal.getInstance(document.getElementById('roleModal'));
+                // Cerrar modal después de registrar el préstamo
+                document.getElementById('loanForm').reset();
+                const modal = bootstrap.Modal.getInstance(document.getElementById('loanModal'));
                 modal.hide();
             } else {
                 alert('Por favor complete todos los campos.');
             }
         });
 
-        // Editar un rol
-        document.getElementById('roleTableBody').addEventListener('click', function(e) {
-            if (e.target.closest('.edit-btn')) {
+        // Marcar préstamo como devuelto
+        document.getElementById('loanTableBody').addEventListener('click', function(e) {
+            if (e.target.closest('.return-btn')) {
                 const row = e.target.closest('tr');
-                document.getElementById('roleName').value = row.cells[1].innerText;
-                document.getElementById('roleDescription').value = row.cells[2].innerText;
-
-                // Marcar que estamos editando
-                editingRoleRow = row;
-
-                const modal = new bootstrap.Modal(document.getElementById('roleModal'));
-                modal.show();
-            }
-        });
-
-        // Eliminar un rol
-        document.getElementById('roleTableBody').addEventListener('click', function(e) {
-            if (e.target.closest('.delete-btn')) {
-                const row = e.target.closest('tr');
-                row.remove();
-                // Reajustar el índice de las filas
-                const rows = document.querySelectorAll('#roleTableBody tr');
-                rows.forEach((row, index) => {
-                    row.cells[0].innerText = index + 1;
-                });
+                row.cells[6].innerText = 'Devuelto';
+                e.target.remove();
             }
         });
     </script>
