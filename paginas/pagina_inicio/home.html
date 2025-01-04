@@ -11,6 +11,9 @@
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         #sidebar {
@@ -131,7 +134,6 @@
         .row {
             margin-top: 3rem;
         }
-
     </style>
 </head>
 <body>
@@ -182,6 +184,16 @@
                             <li class="nav-item">
                                 <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white d-flex align-items-center">
                                     <i class="fas fa-user-shield me-2"></i>Gestionar Rol
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white d-flex align-items-center">
+                                    <i class="fas fa-key me-2"></i>Gestionar Permisos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white d-flex align-items-center">
+                                    <i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos
                                 </a>
                             </li>
                         </ul>
@@ -263,12 +275,35 @@
                         </div>
                     </div>
                 </div>
+                <!-- Gestión de Permisos -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card shadow-sm h-100" id="card-permisos">
+                        <div class="card-body text-center">
+                            <i class="fas fa-key fa-3x text-secondary mb-3"></i>
+                            <h5 class="card-title">Gestión de Permisos</h5>
+                            <p class="card-text">Administra los permisos y roles asignados a los usuarios.</p>
+                            <a href="../../paginas/roles/gestion-permisos.html" class="btn btn-secondary">Ir a Permisos</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ver Estado de Recursos -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card shadow-sm h-100" id="card-estado-recursos">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
+                            <h5 class="card-title">Ver Estado de Recursos</h5>
+                            <p class="card-text">Consulta el estado actual y la disponibilidad de los recursos.</p>
+                            <a href="../../paginas/recursos/estado-recursos.html" class="btn btn-warning">Ir a Estado de Recursos</a>
+                        </div>
+                    </div>
+                </div>
             </div>            
         </div>
     </div>
+</body>
 
     <!-- Footer -->
-    <footer class="bg-danger text-white text-center py-3 mt-auto">
+    <footer class="bg-danger text-white text-center py-3">
         © 2024 Maky System. Todos los derechos reservados.
     </footer>
 

@@ -38,7 +38,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/prestamos/prestamos.html" class="nav-link text-white d-flex align-items-center">
                                     <i class="fas fa-archive me-2"></i>Préstamos
                                 </a>
                             </li>
@@ -55,6 +55,16 @@
                             <li class="nav-item">
                                 <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white d-flex align-items-center">
                                     <i class="fas fa-user-shield me-2"></i>Gestionar Rol
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white d-flex align-items-center">
+                                    <i class="fas fa-key me-2"></i>Gestionar Permisos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white d-flex align-items-center">
+                                    <i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos
                                 </a>
                             </li>
                         </ul>
@@ -215,9 +225,10 @@
                 const modal = bootstrap.Modal.getInstance(document.getElementById('roleModal'));
                 modal.hide();
             } else {
-                alert('Por favor complete todos los campos.');
-            }
-        });
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.classList.remove('d-none'); 
+    }
+});
 
         
         document.getElementById('roleTableBody').addEventListener('click', function(e) {

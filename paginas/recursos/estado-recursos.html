@@ -98,9 +98,9 @@
 
         <!-- Main Content -->
         <div class="flex-grow-1 p-4 bg-light">
-            <h1 class="h4 mb-2">Gestión de Recursos Académicos</h1>
+            <h1 class="h4 mb-2">Ver Estado de Recursos</h1>
             <hr style="margin: 0.5rem 0; border: 1px solid rgba(0, 0, 0, 0.1); box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-            <p class="mt-1">Seleccione una acción para gestionar los recursos académicos.</p>
+            <p class="mt-1">Seleccione una acción para gestionar estados de los recursos.</p>
             <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addResourceModal">Agregar Recurso</button>
 
             <div class="d-flex justify-content-between mb-3">
@@ -169,10 +169,11 @@
                         <div class="mb-3">
                             <label for="addStatus" class="form-label">Estado</label>
                             <select class="form-select" id="addStatus" required>
-                                <option value="Disponible">Disponible</option>
-                                <option value="No Disponible">No Disponible</option>
+                                <option value="Bueno">Bueno</option>
+                                <option value="Deteriorado">Deteriorado</option>
+                                <option value="Malo">Malo</option>
                             </select>
-                        </div>
+                        </div>                        
                         <button type="submit" class="btn btn-primary">Guardar Recurso</button>
                     </form>
                 </div>
@@ -218,44 +219,46 @@
     </div>
 
     <!-- Modal de Edición de Recurso -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Editar Recurso</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editResourceForm">
-                        <div class="mb-3">
-                            <label for="editName" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="editName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editDescription" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="editDescription" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editCategory" class="form-label">Categoría</label>
-                            <select class="form-select" id="editCategory" required>
-                                <option value="Libros">Libros</option>
-                                <option value="Material Digital">Material Digital</option>
-                                <option value="Equipos">Equipos</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editStatus" class="form-label">Estado</label>
-                            <select class="form-select" id="editStatus" required>
-                                <option value="Disponible">Disponible</option>
-                                <option value="No Disponible">No Disponible</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                    </form>
-                </div>
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Recurso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editResourceForm">
+                    <div class="mb-3">
+                        <label for="editName" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="editName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="editDescription" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategory" class="form-label">Categoría</label>
+                        <select class="form-select" id="editCategory" required>
+                            <option value="Libros">Libros</option>
+                            <option value="Material Digital">Material Digital</option>
+                            <option value="Equipos">Equipos</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addStatus" class="form-label">Estado</label>
+                        <select class="form-select" id="addStatus" required>
+                            <option value="Bueno">Bueno</option>
+                            <option value="Deteriorado">Deteriorado</option>
+                            <option value="Malo">Malo</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
 
     <footer id="footer" class="bg-danger text-white text-center py-3 mt-auto">
         © 2024 Maky System. Todos los derechos reservados.
@@ -267,16 +270,16 @@
 
 <script>
     let resources = [
-    { id: 1, name: 'Lápiz', description: 'Lápiz de madera', category: 'Material Digital', status: 'Disponible' },
-    { id: 2, name: 'Cuaderno', description: 'Cuaderno cuadriculado de 100 hojas', category: 'Libros', status: 'Disponible' },
-    { id: 3, name: 'Goma de borrar', description: 'Goma de borrar de caucho', category: 'Material Digital', status: 'Disponible' },
-    { id: 4, name: 'Regla', description: 'Regla plástica de 30 cm', category: 'Equipos', status: 'Disponible' },
-    { id: 5, name: 'Sacapuntas', description: 'Sacapuntas manual', category: 'Material Digital', status: 'Disponible' },
-    { id: 6, name: 'Marcadores', description: 'Set de marcadores de colores', category: 'Material Digital', status: 'Disponible' },
-    { id: 7, name: 'Carpeta', description: 'Carpeta con anillas', category: 'Libros', status: 'Disponible' },
-    { id: 8, name: 'Papel', description: 'Paquete de hojas tamaño carta', category: 'Material Digital', status: 'Disponible' },
-    { id: 9, name: 'Tijeras', description: 'Tijeras escolares de 14 cm', category: 'Equipos', status: 'Disponible' },
-    { id: 10, name: 'Mochila', description: 'Mochila escolar de tela', category: 'Equipos', status: 'Disponible' }
+    { id: 1, name: 'Lápiz', description: 'Lápiz de madera', category: 'Material Digital', status: 'Bueno' },
+    { id: 2, name: 'Cuaderno', description: 'Cuaderno cuadriculado de 100 hojas', category: 'Libros', status: 'Deteriorado' },
+    { id: 3, name: 'Goma de borrar', description: 'Goma de borrar de caucho', category: 'Material Digital', status: 'Malo' },
+    { id: 4, name: 'Regla', description: 'Regla plástica de 30 cm', category: 'Equipos', status: 'Bueno' },
+    { id: 5, name: 'Sacapuntas', description: 'Sacapuntas manual', category: 'Material Digital', status: 'Deteriorado' },
+    { id: 6, name: 'Marcadores', description: 'Set de marcadores de colores', category: 'Material Digital', status: 'Bueno' },
+    { id: 7, name: 'Carpeta', description: 'Carpeta con anillas', category: 'Libros', status: 'Malo' },
+    { id: 8, name: 'Papel', description: 'Paquete de hojas tamaño carta', category: 'Material Digital', status: 'Bueno' },
+    { id: 9, name: 'Tijeras', description: 'Tijeras escolares de 14 cm', category: 'Equipos', status: 'Deteriorado' },
+    { id: 10, name: 'Mochila', description: 'Mochila escolar de tela', category: 'Equipos', status: 'Bueno' }
 ];
 
     let currentPage = 1;
@@ -364,17 +367,21 @@
     }
 
     // Función para abrir el modal de editar
-    function openEditModal(id) {
-        currentResourceId = id;
-        const resource = resources.find(resource => resource.id === id);
-        document.getElementById("editName").value = resource.name;
-        document.getElementById("editDescription").value = resource.description;
-        document.getElementById("editCategory").value = resource.category;
-        document.getElementById("editStatus").value = resource.status;
+function openEditModal(id) {
+    currentResourceId = id;
+    const resource = resources.find(resource => resource.id === id);
+    
+    // Asignar los valores al modal
+    document.getElementById("editName").value = resource.name;
+    document.getElementById("editDescription").value = resource.description;
+    document.getElementById("editCategory").value = resource.category;
+    document.getElementById("addStatus").value = resource.status;
 
-        const editModal = new bootstrap.Modal(document.getElementById("editModal"));
-        editModal.show();
-    }
+    // Mostrar el modal
+    const editModal = new bootstrap.Modal(document.getElementById("editModal"));
+    editModal.show();
+}
+
 
     // Función para agregar un recurso
     document.getElementById("addResourceForm").addEventListener("submit", function (event) {
