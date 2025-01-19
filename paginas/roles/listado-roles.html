@@ -6,65 +6,71 @@
     <title>Gestión de Roles</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="roles.css" rel="stylesheet">
 </head>
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
-        <div class="bg-dark text-white p-3" id="sidebar" style="width: 250px; height: 100vh;">
+        <div class="bg-dark text-white p-3" id="sidebar">
             <div class="text-center mb-4">
                 <img src="../../static/img/fondo_aguilas_saber.png" alt="Logo Maky System" class="img-fluid mb-2" style="max-height: 80px;">
                 <h4>Maky System</h4>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a href="../../paginas/pagina_inicio/home.html" class="nav-link text-white d-flex align-items-center">
+                    <a href="../../paginas/pagina_inicio/home.html" class="nav-link text-white">
                         <i class="fas fa-home me-2"></i>Inicio
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#adminSubmenu" class="nav-link text-white d-flex align-items-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="adminSubmenu">
+                    <a href="#adminSubmenu" class="nav-link text-white" data-bs-toggle="collapse" aria-expanded="false" aria-controls="adminSubmenu">
                         <i class="fas fa-cogs me-2"></i>Administración <i class="fas fa-chevron-down ms-auto"></i>
                     </a>
                     <div class="collapse" id="adminSubmenu">
                         <ul class="nav flex-column ms-3">
                             <li class="nav-item">
-                                <a href="../../paginas/usuarios/listado-usuarios.html" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/usuarios/listado-usuarios.html" class="nav-link text-white">
                                     <i class="fas fa-users me-2"></i>Usuarios
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/recursos/recursos.html" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/recursos/recursos.html" class="nav-link text-white">
                                     <i class="fas fa-boxes me-2"></i>Recursos
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/prestamos/prestamos.html" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/prestamos/prestamos.html" class="nav-link text-white">
                                     <i class="fas fa-archive me-2"></i>Préstamos
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/devoluciones/devoluciones.html" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/devoluciones/devoluciones.html" class="nav-link text-white">
                                     <i class="fas fa-undo me-2"></i>Devoluciones
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/productos/listado-productos.html" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/productos/listado-productos.html" class="nav-link text-white">
                                     <i class="fas fa-shopping-cart me-2"></i>Productos
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white">
                                     <i class="fas fa-user-shield me-2"></i>Gestionar Rol
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white">
                                     <i class="fas fa-key me-2"></i>Gestionar Permisos
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white d-flex align-items-center">
+                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white">
                                     <i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../paginas/productos/ingreso-productos.html" class="nav-link text-white">
+                                    <i class="fas fa-arrow-up me-2"></i>Gestión de Ingresos
                                 </a>
                             </li>
                         </ul>
@@ -82,7 +88,6 @@
             <p class="mt-1">Llenar los campos para registrar o editar roles</p>
             <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#roleModal">Agregar Rol</button>
 
-            
             <div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -104,6 +109,13 @@
                                     <label for="roleDescription" class="form-label">Descripción</label>
                                     <textarea class="form-control" id="roleDescription" rows="3" required></textarea>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="roleStatus" class="form-label">Estado</label>
+                                    <select class="form-control" id="roleStatus" required>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -120,6 +132,7 @@
                         <th>#</th>
                         <th>Nombre del Rol</th>
                         <th>Descripción</th>
+                        <th>Estado</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -129,6 +142,7 @@
                         <td>1</td>
                         <td>Administrador</td>
                         <td>Rol con permisos completos para gestionar el sistema.</td>
+                        <td><span class="badge bg-danger">Activo</span></td>
                         <td><button class="btn btn-icon text-primary"><i class="fas fa-edit"></i></button></td>
                         <td><button class="btn btn-icon text-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
@@ -136,6 +150,7 @@
                         <td>2</td>
                         <td>Usuario</td>
                         <td>Rol con acceso limitado a funcionalidades básicas.</td>
+                        <td><span class="badge bg-primary">Inactivo</span></td>
                         <td><button class="btn btn-icon text-primary"><i class="fas fa-edit"></i></button></td>
                         <td><button class="btn btn-icon text-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
@@ -143,132 +158,100 @@
                         <td>3</td>
                         <td>Docente</td>
                         <td>Rol para gestionar el contenido educativo y actividades.</td>
+                        <td><span class="badge bg-danger">Activo</span></td>
                         <td><button class="btn btn-icon text-primary"><i class="fas fa-edit"></i></button></td>
                         <td><button class="btn btn-icon text-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>
 
-    
-    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteConfirmModalLabel">Confirmar Eliminación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Estás seguro de que deseas eliminar este rol? Esta acción no se puede deshacer.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+        <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteConfirmModalLabel">Confirmar Eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas eliminar este rol? Esta acción no se puede deshacer.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    
-    <div class="modal fade" id="successDeleteModal" tabindex="-1" aria-labelledby="successDeleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successDeleteModalLabel">Eliminación Exitosa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Se ha eliminado el rol satisfactoriamente.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+        <div class="modal fade" id="successDeleteModal" tabindex="-1" aria-labelledby="successDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successDeleteModalLabel">Eliminación Exitosa</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        El rol ha sido eliminado exitosamente.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-danger text-white text-center py-3 mt-auto">
+    <footer class="bg-danger text-white text-center py-3">
         © 2024 Maky System. Todos los derechos reservados.
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let editingRoleRow = null; 
-        let rowToDelete = null; 
-
-        
-        document.getElementById('saveRoleBtn').addEventListener('click', function() {
-            const roleName = document.getElementById('roleName').value;
-            const roleDescription = document.getElementById('roleDescription').value;
-
-            if (roleName && roleDescription) {
-                const tableBody = document.getElementById('roleTableBody');
-                if (editingRoleRow) {
-                    editingRoleRow.cells[1].innerText = roleName;
-                    editingRoleRow.cells[2].innerText = roleDescription;
-                    editingRoleRow = null;
-                } else {
-                    const newRow = document.createElement('tr');
-                    newRow.innerHTML = ` 
-                        <td>${tableBody.rows.length + 1}</td>
-                        <td>${roleName}</td>
-                        <td>${roleDescription}</td>
-                        <td><button class="btn btn-icon text-primary"><i class="fas fa-edit"></i></button></td>
-                        <td><button class="btn btn-icon text-danger"><i class="fas fa-trash-alt"></i></button></td>
-                    `;
-                    tableBody.appendChild(newRow);
-                }
-
-                document.getElementById('roleForm').reset();
-                const modal = bootstrap.Modal.getInstance(document.getElementById('roleModal'));
-                modal.hide();
-            } else {
-        const errorMessage = document.getElementById('errorMessage');
-        errorMessage.classList.remove('d-none'); 
-    }
-});
-
-        
         document.getElementById('roleTableBody').addEventListener('click', function(e) {
-            if (e.target.closest('.btn-icon.text-primary')) {
-                const row = e.target.closest('tr');
+            const editBtn = e.target.closest('.btn-icon.text-primary');
+            const deleteBtn = e.target.closest('.btn-icon.text-danger');
+            
+            if (editBtn) {
+                const row = editBtn.closest('tr');
                 document.getElementById('roleName').value = row.cells[1].innerText;
                 document.getElementById('roleDescription').value = row.cells[2].innerText;
-
+                document.getElementById('roleStatus').value = row.cells[3].innerText === "Activo" ? "Activo" : "Inactivo";
                 editingRoleRow = row;
-
                 const modal = new bootstrap.Modal(document.getElementById('roleModal'));
                 modal.show();
             }
-        });
-
-        
-        document.getElementById('roleTableBody').addEventListener('click', function(e) {
-            if (e.target.closest('.btn-icon.text-danger')) {
-                rowToDelete = e.target.closest('tr');
+            
+            if (deleteBtn) {
+                rowToDelete = deleteBtn.closest('tr');
                 const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
                 modal.show();
             }
         });
 
-        
         document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
-            if (rowToDelete) {
-                rowToDelete.remove();
-                
-                const rows = document.querySelectorAll('#roleTableBody tr');
-                rows.forEach((row, index) => {
-                    row.cells[0].innerText = index + 1;
-                });
+            rowToDelete.remove();
+            new bootstrap.Modal(document.getElementById('deleteConfirmModal')).hide();
+            new bootstrap.Modal(document.getElementById('successDeleteModal')).show();
+        });
 
-                
-                const successModal = new bootstrap.Modal(document.getElementById('successDeleteModal'));
-                successModal.show();
-            }
-
-            const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+        document.getElementById('saveRoleBtn').addEventListener('click', function() {
+            const name = document.getElementById('roleName').value;
+            const description = document.getElementById('roleDescription').value;
+            const status = document.getElementById('roleStatus').value;
+            const tableBody = document.getElementById('roleTableBody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${tableBody.rows.length + 1}</td>
+                <td>${name}</td>
+                <td>${description}</td>
+                <td><span class="badge bg-${status === 'Activo' ? 'danger' : 'primary'}">${status}</span></td>
+                <td><button class="btn btn-icon text-primary"><i class="fas fa-edit"></i></button></td>
+                <td><button class="btn btn-icon text-danger"><i class="fas fa-trash-alt"></i></button></td>
+            `;
+            tableBody.appendChild(newRow);
+            const modal = new bootstrap.Modal(document.getElementById('roleModal'));
             modal.hide();
         });
     </script>

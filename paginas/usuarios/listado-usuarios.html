@@ -6,82 +6,54 @@
     <title>Gestión de Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        #footer {
-            transition: transform 0.3s ease-in-out;
-        }
-        .hidden-footer {
-            transform: translateY(100%);
-        }
-        .btn-icon {
-            font-size: 1.2rem;
-            padding: 0.5rem;
-            cursor: pointer;
-        }
-        .btn-icon:hover {
-            opacity: 0.7;
-        }
-    </style>
+    <link href="usuario.css" rel="stylesheet">
 </head>
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
-        <div class="bg-dark text-white p-3" id="sidebar" style="width: 250px; height: 100vh;">
+        <div id="sidebar" class="bg-dark text-white p-3">
             <div class="text-center mb-4">
                 <img src="../../static/img/fondo_aguilas_saber.png" alt="Logo Maky System" class="img-fluid mb-2" style="max-height: 80px;">
                 <h4>Maky System</h4>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a href="../../paginas/pagina_inicio/home.html" class="nav-link text-white d-flex align-items-center">
+                    <a href="../../paginas/pagina_inicio/home.html" class="nav-link text-white">
                         <i class="fas fa-home me-2"></i>Inicio
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#adminSubmenu" class="nav-link text-white d-flex align-items-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="adminSubmenu">
+                    <a href="#adminSubmenu" class="nav-link text-white" data-bs-toggle="collapse" aria-expanded="false">
                         <i class="fas fa-cogs me-2"></i>Administración <i class="fas fa-chevron-down ms-auto"></i>
                     </a>
                     <div class="collapse" id="adminSubmenu">
                         <ul class="nav flex-column ms-3">
                             <li class="nav-item">
-                                <a href="../../paginas/usuarios/listado-usuarios.html" class="nav-link text-white d-flex align-items-center">
-                                    <i class="fas fa-users me-2"></i>Usuarios
-                                </a>
+                                <a href="../../paginas/usuarios/listado-usuarios.html" class="nav-link text-white"><i class="fas fa-users me-2"></i>Usuarios</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/recursos/recursos.html" class="nav-link text-white d-flex align-items-center">
-                                    <i class="fas fa-boxes me-2"></i>Recursos
-                                </a>
+                                <a href="../../paginas/recursos/recursos.html" class="nav-link text-white"><i class="fas fa-boxes me-2"></i>Recursos</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/prestamos/prestamos.html" class="nav-link text-white d-flex align-items-center">
-                                    <i class="fas fa-archive me-2"></i>Préstamos
-                                </a>
+                                <a href="../../paginas/prestamos/prestamos.html" class="nav-link text-white"><i class="fas fa-archive me-2"></i>Préstamos</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/devoluciones/devoluciones.html" class="nav-link text-white d-flex align-items-center">
-                                    <i class="fas fa-undo me-2"></i>Devoluciones
-                                </a>
+                                <a href="../../paginas/devoluciones/devoluciones.html" class="nav-link text-white"><i class="fas fa-undo me-2"></i>Devoluciones</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/productos/listado-productos.html" class="nav-link text-white d-flex align-items-center">
-                                    <i class="fas fa-shopping-cart me-2"></i>Productos
-                                </a>
+                                <a href="../../paginas/productos/listado-productos.html" class="nav-link text-white"><i class="fas fa-shopping-cart me-2"></i>Productos</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white d-flex align-items-center">
-                                    <i class="fas fa-user-shield me-2"></i>Gestionar Rol
-                                </a>
+                                <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white"><i class="fas fa-user-shield me-2"></i>Gestionar Rol</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white d-flex align-items-center">
-                                    <i class="fas fa-key me-2"></i>Gestionar Permisos
-                                </a>
+                                <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white"><i class="fas fa-key me-2"></i>Gestionar Permisos</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white d-flex align-items-center">
-                                    <i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos
-                                </a>
+                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white"><i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../paginas/productos/ingreso-productos.html" class="nav-link text-white"><i class="fas fa-arrow-up me-2"></i>Gestión de Ingresos</a>
                             </li>
                         </ul>
                     </div>
@@ -92,14 +64,13 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-grow-1 p-4 bg-light">
-            <h1 class="h4 mb-2">Gestión de Usuarios</h1>
-            <hr style="margin: 0.5rem 0; border: 1px solid rgba(0, 0, 0, 0.1); box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-            <p class="mt-1">Seleccione una acción para gestionar usuarios.</p>
-            <a href="../../paginas/usuarios/agregar-usuario.html" class="btn btn-success mb-3" >Agregar Usuario</a>
+        <div class="main-content flex-grow-1 p-3">
+            <h1 class="h4 mb-3">Gestión de Usuarios</h1>
+            <p>Seleccione una acción para gestionar usuarios.</p>
+            <a href="../../paginas/usuarios/agregar-usuario.html" class="btn btn-success mb-3">Agregar Usuario</a>
 
             <div class="d-flex justify-content-between mb-3">
-                <div class="d-flex align-items-center">
+                <div>
                     <label for="userPerPage" class="me-2">Mostrar:</label>
                     <select id="userPerPage" class="form-select w-auto">
                         <option value="10">10 Usuarios</option>
@@ -108,9 +79,7 @@
                 </div>
                 <div class="input-group w-50">
                     <input type="text" id="searchInput" class="form-control" placeholder="Buscar usuarios">
-                    <button class="btn btn-outline-secondary" id="searchButton">
-                        <i class="fas fa-search"></i>
-                    </button>
+                    <button class="btn btn-outline-secondary" id="searchButton"><i class="fas fa-search"></i></button>
                 </div>
             </div>
 
@@ -138,16 +107,14 @@
     </div>
 
     <!-- Modal de Confirmación de Eliminación -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Eliminación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    ¿Estás seguro de que deseas eliminar al usuario <span id="userNameToDelete"></span>?
-                </div>
+                <div class="modal-body">¿Estás seguro de que deseas eliminar al usuario <span id="userNameToDelete"></span>?</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-danger" onclick="deleteUser()">Eliminar</button>
@@ -157,16 +124,14 @@
     </div>
 
     <!-- Modal de Notificación de Éxito -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal fade" id="successModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Usuario Eliminado</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <h5 class="modal-title">Usuario Eliminado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    El usuario ha sido eliminado satisfactoriamente.
-                </div>
+                <div class="modal-body">El usuario ha sido eliminado satisfactoriamente.</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
                 </div>
@@ -174,53 +139,6 @@
         </div>
     </div>
 
-    <!-- Modal de Edición de Usuario -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Editar Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editUserForm">
-                    <div class="mb-3">
-                        <label for="editName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="editName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editLastName" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="editLastName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editEmail" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="editEmail" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editPhone" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" id="editPhone" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editRole" class="form-label">Rol</label>
-                        <select class="form-control" id="editRole" required>
-                            <option value="administrador">Administrador</option>
-                            <option value="docente">Docente</option>
-                            <option value="usuario">Usuario</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editStatus" class="form-label">Estado</label>
-                        <select class="form-control" id="editStatus" required>
-                            <option value="activo">Activo</option>
-                            <option value="inactivo">Inactivo</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
     <footer id="footer" class="bg-danger text-white text-center py-3 mt-auto">
         © 2024 Maky System. Todos los derechos reservados.
@@ -369,34 +287,19 @@ function editUser(id) {
 
     new bootstrap.Modal(document.getElementById('editModal')).show();
 }
-
-document.getElementById("editUserForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const updatedUser = {
-        id: userIdToEdit,
-        name: capitalizeFirstLetter(document.getElementById("editName").value),
-        lastName: capitalizeFirstLetter(document.getElementById("editLastName").value),
-        email: document.getElementById("editEmail").value,
-        phone: document.getElementById("editPhone").value,
-        role: capitalizeFirstLetter(document.getElementById("editRole").value),
-        status: capitalizeFirstLetter(document.getElementById("editStatus").value)
-    };
-
-    users = users.map(user => user.id === userIdToEdit ? updatedUser : user);
-
-    renderTable();
-    renderPagination();
-
-    const modal = document.getElementById('editModal');
-    const modalInstance = bootstrap.Modal.getInstance(modal); 
-    modalInstance.hide();
-});
-
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
+const sidebar = document.getElementById('sidebar');
+const mainContent = document.querySelector('.main-content');
 
+function adjustSidebarHeight() {
+    const contentHeight = mainContent.offsetHeight;
+}
+
+
+window.addEventListener('load', adjustSidebarHeight);
+window.addEventListener('resize', adjustSidebarHeight);
 </script>
 </body>
 </html>

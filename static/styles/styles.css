@@ -1,71 +1,220 @@
-  /* Estilos para la pagína de login */
+/* Estilos para la página de login */
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-image: url('../../static/img/fondo_escuela.png'); 
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 0;
-    padding: 0;
-  }  
-  
-  .login-container {
-    background-color: rgba(242, 242, 242, 0.89); 
-    max-width: 400px;
-    width: 100%;
-    padding: 20px;
-    border: 2px solid #000000; 
-    border-radius: 10px; 
-  }  
-  
+  font-family: 'Poppins', sans-serif;
+  background-image: url('../../static/img/fondo_escuela.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.login-container {
+  border: 2px solid #000000;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 380px;
+  padding: 40px;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.login-container img {
+  max-width: 150px;
+  margin-bottom: 20px;
+  animation: slideIn 1s ease-out;
+}
+
+@keyframes slideIn {
+  0% {
+      transform: translateX(-100%);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+
+h2 {
+  color: #000000;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.form-control {
+  border-radius: 10px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #e60000;
+  box-shadow: 0 0 0 0.2rem rgba(230, 0, 0, 0.25);
+}
+
+.btn-danger {
+  background-color: #e60000;
+  color: white;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c70000;
+  transform: translateY(-2px);
+}
+
+.footer a {
+  color: #e60000;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  color: #c70000;
+}
+
+.modal-content {
+  border-radius: 15px;
+  animation: fadeInModal 0.5s ease-out;
+}
+
+@keyframes fadeInModal {
+  0% {
+      transform: translateY(-50%);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.modal-header {
+  background-color: #e60000;
+  color: white;
+  border-radius: 15px 15px 0 0;
+}
+
+.modal-footer button {
+  background-color: #e60000;
+  color: white;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-footer button:hover {
+  background-color: #c70000;
+}
+
+/* Media Queries para Responsividad */
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 576px) {
   h2 {
-    color: #000000; 
-    font-weight: 600; 
+      font-size: 1.25rem;
   }
-  
-  .form-control:focus {
-    border-color: #e60000;
-    box-shadow: none;
+
+  .login-container {
+      padding: 20px;
   }
-  
+
+  .login-container img {
+      max-width: 120px;
+      margin-bottom: 15px;
+  }
+
+  .form-control {
+      font-size: 1rem;
+      padding: 0.8rem;
+  }
+
   .btn-danger {
-    background-color: #e60000;
-    border-color: #e60000;
+      font-size: 1rem;
+      padding: 0.8rem;
   }
-  
-  .btn-danger:hover {
-    background-color: #b30000;
-    border-color: #b30000;
-  }
-  
-  .footer a {
-    color: #e60000;
-    text-decoration: none;
-  }
-  
-  .footer a:hover {
-    text-decoration: underline;
-  }
-
-
-  #sidebar .nav-link {
-    font-size: 16px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background 0.3s;
 }
 
-#sidebar .nav-link:hover {
-    background: rgba(255, 255, 255, 0.1);
+/* Pantallas medianas (tabletas) */
+@media (max-width: 768px) {
+  .login-container {
+      max-width: 90%;
+  }
+
+  h2 {
+      font-size: 1.4rem;
+  }
+
+  .login-container img {
+      max-width: 130px;
+  }
+
+  .form-control {
+      font-size: 1.1rem;
+      padding: 1rem;
+  }
+
+  .btn-danger {
+      font-size: 1.1rem;
+      padding: 1rem;
+  }
 }
 
+/* Pantallas grandes (escritorio) */
+@media (min-width: 1200px) {
+  .login-container {
+      max-width: 400px;
+  }
+
+  h2 {
+      font-size: 1.6rem;
+  }
+
+  .form-control {
+      font-size: 1.2rem;
+  }
+
+  .btn-danger {
+      font-size: 1.2rem;
+  }
+}
+
+/* Para las tablas (en caso de que haya) */
 .table-striped tbody tr:hover {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
+/* Footer fijo en la parte inferior */
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Responsividad del footer */
+@media (max-width: 576px) {
+  footer {
+      font-size: 0.9rem;
+  }
+}
+.input-group-text i {
+  font-size: 1.2rem; 
 }
