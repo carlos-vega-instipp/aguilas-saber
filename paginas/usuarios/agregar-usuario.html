@@ -44,11 +44,13 @@
                     <label for="userPhone" class="form-label required">Teléfono</label>
                     <input type="text" class="form-control" id="userPhone" placeholder="Ingrese su número de teléfono" required>
                     <div class="invalid-feedback">Este campo es obligatorio.</div>
+
                 </div>
                 <div class="mb-3">
                     <label for="userPassword" class="form-label required">Contraseña</label>
                     <input type="password" class="form-control" id="userPassword" placeholder="Ingrese una contraseña" required>
                     <div class="invalid-feedback">Este campo es obligatorio.</div>
+
                 </div>
                 <div class="mb-3">
                     <label for="userConfirmPassword" class="form-label required">Confirmar Contraseña</label>
@@ -120,6 +122,7 @@
                 alert('Las contraseñas no coinciden.');
                 return;
             }
+
 
             if (!userStatus) {
                 alert('Por favor, complete todos los campos obligatorios.');

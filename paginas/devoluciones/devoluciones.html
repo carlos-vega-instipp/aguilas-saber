@@ -8,6 +8,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .pagination .page-item .page-link {
+        background-color: white;
+        color: #007bff; 
+        border: 1px solid #dee2e6; 
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: white; 
+        color: #007bff; 
+        border: 1px solid #ddd5d5; 
+    }
+
+    .pagination .page-item .page-link:hover {
+        background-color: #f8f9fa; 
+    }
+</style>
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
@@ -35,7 +52,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/recursos/recursos.html" class="nav-link text-white">
-                                    <i class="fas fa-boxes me-2"></i>Recursos
+                   <i class="fas fa-boxes me-2"></i>Recursos
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -55,7 +72,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white">
-                                    <i class="fas fa-user-shield me-2"></i>Gestionar Rol
+                                   <i class="fas fa-user-shield me-2"></i>Gestionar Rol
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -206,7 +223,6 @@
             const startIndex = (page - 1) * itemsPerPage;
             const endIndex = page * itemsPerPage;
             const currentReturns = returns.slice(startIndex, endIndex);
-
             const tableBody = document.getElementById('returnTableBody');
             tableBody.innerHTML = "";
 
