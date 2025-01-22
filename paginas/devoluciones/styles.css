@@ -18,25 +18,91 @@ body {
     transition: all 0.3s ease;
 }
 
+/* Estilos para los enlaces del sidebar */
 #sidebar .nav-link {
     font-size: 16px;
     margin: 5px 0;
-    padding: 10px;
+    padding: 10px 16px;
     color: #fff;
-    display: block;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    transition: background-color 0.3s;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
-
+/* Efecto de hover */
 #sidebar .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.2);
+    transform: translateX(8px);
 }
 
-#sidebar .collapse .nav-link {
-    font-size: 14px;
-    padding-left: 2.5rem;
+/* Efecto en iconos del sidebar */
+#sidebar .nav-link i {
+    margin-right: 12px;
+    transition: transform 0.3s ease;
+}
+
+#sidebar .nav-link:hover i {
+    transform: scale(1.1);
+}
+
+/* Enlace activo */
+#sidebar .nav-link.active {
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 4px 12px rgba(220, 53, 69, 0.2);
+    transform: translateX(5px);
+}
+
+/* Enlace no activo al pasar el mouse */
+#sidebar .nav-link:not(.active):hover {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+/* Animación para el encabezado */
+.main-header {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideInUp 1s ease-out forwards;
+}
+
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación para el párrafo */
+.text-secondary {
+    opacity: 0;
+    transform: translateY(-15px);
+    animation: slideInUp 1s ease-out 0.3s forwards;
+}
+
+/* Animación para la fila */
+.row {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.6s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .input-group .btn {
@@ -216,5 +282,14 @@ body {
     border-color: #d6d6d6 !important;        
     border-width: 1px;                       
     border-style: solid;                     
-    color: inherit !important;               
+    color: #007bff;             
+}
+
+#errorMessage {
+    display: none; 
+    color: #fff;
+    background-color: #dc3545; 
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
 }

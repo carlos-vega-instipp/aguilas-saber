@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Recursos Académicos</title>
+    <link rel="icon" href="../../static/img/fondo_aguilas_saber.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="recursos.css" rel="stylesheet">
@@ -36,7 +37,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/recursos/recursos.html" class="nav-link text-white">
+                                <a href="../../paginas/recursos/recursos.html" class="nav-link active text-white">
                                     <i class="fas fa-boxes me-2"></i>Recursos
                                 </a>
                             </li>
@@ -57,22 +58,22 @@
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white">
-                                    <i class="fas fa-user-shield me-2"></i>Gestionar Rol
+                                    <i class="fas fa-user-shield me-2"></i>Rol
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white">
-                                    <i class="fas fa-key me-2"></i>Gestionar Permisos
+                                    <i class="fas fa-key me-2"></i>Permisos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white">
-                                    <i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos
+                                    <i class="fas fa-chart-line me-2"></i>Estado de Recursos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/productos/ingreso-productos.html" class="nav-link text-white">
-                                    <i class="fas fa-arrow-up me-2"></i>Gestión de Ingresos
+                                    <i class="fas fa-arrow-up me-2"></i>Ingresos
                                 </a>
                             </li>
                         </ul>
@@ -365,41 +366,108 @@
 
     // Función para agregar un recurso
     document.getElementById("addResourceForm").addEventListener("submit", function (event) {
-        event.preventDefault();
+    event.preventDefault();
 
-        const newResource = {
-            id: resources.length + 1,
-            name: document.getElementById("addName").value,
-            description: document.getElementById("addDescription").value,
-            category: document.getElementById("addCategory").value,
-            status: document.getElementById("addStatus").value
-        };
+    const newResource = {
+        id: resources.length + 1,
+        name: document.getElementById("addName").value,
+        description: document.getElementById("addDescription").value,
+        category: document.getElementById("addCategory").value,
+        status: document.getElementById("addStatus").value
+    };
 
-        resources.push(newResource);
-        renderTable();
-        const addModal = new bootstrap.Modal(document.getElementById("addResourceModal"));
-        addModal.hide();
-    });
+    resources.push(newResource);
+    
+    // Correct way to handle the modal
+    const addModal = bootstrap.Modal.getInstance(document.getElementById("addResourceModal"));
+    addModal.hide();
+    
+    // Clear form
+    document.getElementById("addResourceForm").reset();
+    
+    // Update table
+    renderTable();
+});
 
     // Función para editar un recurso
-    document.getElementById("editResourceForm").addEventListener("submit", function (event) {
-        event.preventDefault();
+function editResource(resourceId) {
+    currentResourceId = resourceId;
+    const resource = resources.find(r => r.id === resourceId);
+    
+    // Populate form fields
+    document.getElementById("editName").value = resource.name;
+    document.getElementById("editDescription").value = resource.description;
+    document.getElementById("editCategory").value = resource.category;
+    document.getElementById("editStatus").value = resource.status;
 
-        const updatedResource = {
-            id: currentResourceId,
-            name: document.getElementById("editName").value,
-            description: document.getElementById("editDescription").value,
-            category: document.getElementById("editCategory").value,
-            status: document.getElementById("editStatus").value
-        };
+    // Open modal
+    const editModal = new bootstrap.Modal(document.getElementById("editModal"));
+    editModal.show();
+}
 
-        const index = resources.findIndex(resource => resource.id === currentResourceId);
+document.getElementById("editResourceForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const updatedResource = {
+        id: currentResourceId,
+        name: document.getElementById("editName").value,
+        description: document.getElementById("editDescription").value,
+        category: document.getElementById("editCategory").value,
+        status: document.getElementById("editStatus").value
+    };
+
+    const index = resources.findIndex(resource => resource.id === currentResourceId);
+    if (index !== -1) {
         resources[index] = updatedResource;
+        
+        // Close modal using correct ID
+        const modal = document.getElementById('editModal');
+        const modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) {
+            modalInstance.hide();
+        }
+
+        // Clear form
+        document.getElementById("editResourceForm").reset();
+        
+        // Update table
         renderTable();
-        const editModal = new bootstrap.Modal(document.getElementById("editModal"));
-        editModal.hide();
-    });
+    }
+});
+
+// Add resource form handler
+document.getElementById("addResourceForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const newResource = {
+        id: resources.length + 1,
+        name: document.getElementById("addName").value,
+        description: document.getElementById("addDescription").value,
+        category: document.getElementById("addCategory").value,
+        status: document.getElementById("addStatus").value
+    };
+
+    resources.push(newResource);
+    
+    // Close modal using correct ID
+    const modal = document.getElementById('addModal');
+    const modalInstance = bootstrap.Modal.getInstance(modal);
+    if (modalInstance) {
+        modalInstance.hide();
+    }
+    
+    // Clear form
+    document.getElementById("addResourceForm").reset();
+    
+    // Update table
+    renderTable();
+});
+
+// Initialize table
+renderTable();
 
     // Inicialización de la tabla al cargar la página
     renderTable();
 </script>
+</body>
+</html>

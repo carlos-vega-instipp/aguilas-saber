@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Usuarios</title>
+    <link rel="icon" href="../../static/img/fondo_aguilas_saber.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="usuario.css" rel="stylesheet">
@@ -29,7 +30,7 @@
                     <div class="collapse" id="adminSubmenu">
                         <ul class="nav flex-column ms-3">
                             <li class="nav-item">
-                                <a href="../../paginas/usuarios/listado-usuarios.html" class="nav-link text-white"><i class="fas fa-users me-2"></i>Usuarios</a>
+                                <a href="../../paginas/usuarios/listado-usuarios.html" class="nav-link active text-white"><i class="fas fa-users me-2"></i>Usuarios</a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/recursos/recursos.html" class="nav-link text-white"><i class="fas fa-boxes me-2"></i>Recursos</a>
@@ -44,16 +45,16 @@
                                 <a href="../../paginas/productos/listado-productos.html" class="nav-link text-white"><i class="fas fa-shopping-cart me-2"></i>Productos</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white"><i class="fas fa-user-shield me-2"></i>Gestionar Rol</a>
+                                <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white"><i class="fas fa-user-shield me-2"></i>Rol</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white"><i class="fas fa-key me-2"></i>Gestionar Permisos</a>
+                                <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white"><i class="fas fa-key me-2"></i>Permisos</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white"><i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos</a>
+                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white"><i class="fas fa-chart-line me-2"></i>Estado de Recursos</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/productos/ingreso-productos.html" class="nav-link text-white"><i class="fas fa-arrow-up me-2"></i>Gestión de Ingresos</a>
+                                <a href="../../paginas/productos/ingreso-productos.html" class="nav-link text-white"><i class="fas fa-arrow-up me-2"></i>Ingresos</a>
                             </li>
                         </ul>
                     </div>
@@ -70,7 +71,7 @@
             <a href="../../paginas/usuarios/agregar-usuario.html" class="btn btn-success mb-3">Agregar Usuario</a>
 
             <div class="d-flex justify-content-between mb-3">
-                <div>
+                <div class="d-flex align-items-center">
                     <label for="userPerPage" class="me-2">Mostrar:</label>
                     <select id="userPerPage" class="form-select w-auto">
                         <option value="10">10 Usuarios</option>
@@ -138,6 +139,56 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Edición de Usuario -->
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm">
+                    <div class="mb-3">
+                        <label for="editName" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="editName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editLastName" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="editLastName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="editEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPhone" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="editPhone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editRole" class="form-label">Rol</label>
+                        <select class="form-select" id="editRole" required>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Usuario">Usuario</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editStatus" class="form-label">Estado</label>
+                        <select class="form-select" id="editStatus" required>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveUserChanges()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
     <footer id="footer" class="bg-danger text-white text-center py-3 mt-auto">
@@ -287,6 +338,26 @@ function editUser(id) {
 
     new bootstrap.Modal(document.getElementById('editModal')).show();
 }
+
+function saveUserChanges() {
+    const user = users.find(u => u.id === userIdToEdit);
+
+    user.name = document.getElementById("editName").value;
+    user.lastName = document.getElementById("editLastName").value;
+    user.email = document.getElementById("editEmail").value;
+    user.phone = document.getElementById("editPhone").value;
+    user.role = document.getElementById("editRole").value;
+    user.status = document.getElementById("editStatus").value;
+
+    renderTable();
+    renderPagination();
+
+    // Cerrar el modal
+    const editModal = document.getElementById('editModal');
+    const editModalInstance = bootstrap.Modal.getInstance(editModal);
+    editModalInstance.hide();
+}
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }

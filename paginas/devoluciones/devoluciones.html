@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Devoluciones</title>
+    <link rel="icon" href="../../static/img/fondo_aguilas_saber.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -44,7 +45,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/devoluciones/devoluciones.html" class="nav-link text-white">
+                                <a href="../../paginas/devoluciones/devoluciones.html" class="nav-link active text-white">
                                     <i class="fas fa-undo me-2"></i>Devoluciones
                                 </a>
                             </li>
@@ -55,22 +56,22 @@
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white">
-                                    <i class="fas fa-user-shield me-2"></i>Gestionar Rol
+                                    <i class="fas fa-user-shield me-2"></i>Rol
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white">
-                                    <i class="fas fa-key me-2"></i>Gestionar Permisos
+                                    <i class="fas fa-key me-2"></i>Permisos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white">
-                                    <i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos
+                                    <i class="fas fa-chart-line me-2"></i>Estado de Recursos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/productos/ingreso-productos.html" class="nav-link text-white">
-                                    <i class="fas fa-arrow-up me-2"></i>Gestión de Ingresos
+                                    <i class="fas fa-arrow-up me-2"></i>Ingresos
                                 </a>
                             </li>
                         </ul>
@@ -177,6 +178,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" onclick="addReturn()">Agregar</button>
+                <!-- Contenedor para mensajes de error -->
+            <div id="errorMessage" class="alert alert-danger mt-3" style="display: none;">Por favor, completa todos los campos antes de agregar un registro.</div>
             </div>
         </div>
     </div>
@@ -282,13 +285,28 @@
         }
 
         function addReturn() {
-    const borrowerName = document.getElementById("borrowerName").value;
-    const articleTitle = document.getElementById("articleTitle").value;
-    const articleType = document.getElementById("articleType").value;
-    const loanDate = document.getElementById("loanDate").value;
-    const returnDate = document.getElementById("returnDate").value;
-    const returnStatus = document.getElementById("returnStatus").value; 
+    // Obtener los valores de los campos
+    const borrowerName = document.getElementById("borrowerName").value.trim();
+    const articleTitle = document.getElementById("articleTitle").value.trim();
+    const articleType = document.getElementById("articleType").value.trim();
+    const loanDate = document.getElementById("loanDate").value.trim();
+    const returnDate = document.getElementById("returnDate").value.trim();
+    const returnStatus = document.getElementById("returnStatus").value.trim();
 
+    // Seleccionar el contenedor del mensaje de error
+    const errorMessage = document.getElementById("errorMessage");
+
+    // Validar que los campos no estén vacíos
+    if (!borrowerName || !articleTitle || !articleType || !loanDate || !returnDate || !returnStatus) {
+        errorMessage.style.display = "block"; // Mostrar mensaje
+        errorMessage.textContent = "Por favor, completa todos los campos antes de agregar un registro.";
+        return;
+    }
+
+    // Ocultar el mensaje de error si todo está bien
+    errorMessage.style.display = "none";
+
+    // Crear el nuevo objeto de devolución
     const newReturn = {
         id: returns.length + 1,
         borrower: borrowerName,
@@ -296,15 +314,24 @@
         articleType: articleType,
         loanDate: loanDate,
         returnDate: returnDate,
-        status: returnStatus 
+        status: returnStatus,
     };
 
+    // Agregar el nuevo registro al array
     returns.push(newReturn);
+
+    // Renderizar la tabla nuevamente
     renderTable(currentPage);
+
+    // Resetear el formulario
     document.getElementById("addReturnForm").reset();
-    const modal = new bootstrap.Modal(document.getElementById("addReturnModal"));
+
+    // Cerrar el modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById("addReturnModal"));
     modal.hide();
 }
+
+
 
         renderTable(currentPage);
     </script>

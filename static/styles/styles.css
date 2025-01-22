@@ -1,205 +1,160 @@
 /* Estilos para la página de login */
-
 body {
   font-family: 'Poppins', sans-serif;
-  background-image: url('../../static/img/fondo_escuela.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(135deg, #ff0000 30%, #ffffff 100%);
   margin: 0;
   padding: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #333;
   overflow: hidden;
 }
 
 .login-container {
-  border: 2px solid #000000;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
   width: 100%;
-  max-width: 380px;
   padding: 40px;
-  opacity: 0;
-  transform: translateY(50px);
-  animation: fadeInUp 0.8s forwards;
+  text-align: center;
+  animation: fadeInUp 0.8s forwards ease-in-out;
+  position: relative;
 }
 
 @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .login-container img {
-  max-width: 150px;
+  max-width: 100px; 
   margin-bottom: 20px;
-  animation: slideIn 1s ease-out;
+  border-radius: 50%; 
+  animation: bounceIn 1s ease-out;
 }
 
-@keyframes slideIn {
+@keyframes bounceIn {
   0% {
-      transform: translateX(-100%);
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
   }
   100% {
-      transform: translateX(0);
+    transform: scale(1);
   }
 }
 
 h2 {
-  color: #000000;
-  font-weight: 600;
-  font-size: 1.5rem;
+  color: #ff0000;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  animation: fadeInRight 1s ease-out;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
+  animation: slideInLeft 1s ease-in-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.input-group-text i {
+  color: #ff0000;
+  font-size: 1.2rem;
 }
 
 .form-control {
+  width: 100%;
   border-radius: 10px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  padding: 0.8rem;
+  transition: all 0.3s ease;
 }
 
 .form-control:focus {
-  border-color: #e60000;
-  box-shadow: 0 0 0 0.2rem rgba(230, 0, 0, 0.25);
+  border-color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
 }
 
 .btn-danger {
-  background-color: #e60000;
+  background-color: #ff0000;
   color: white;
   border-radius: 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.2rem;
+  transition: all 0.3s ease;
+  animation: fadeInBottom 1s ease-out;
+}
+
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .btn-danger:hover {
-  background-color: #c70000;
+  background-color: #cc0000;
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.footer a {
-  color: #e60000;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
 
-.footer a:hover {
-  text-decoration: underline;
-  color: #c70000;
-}
-
-.modal-content {
-  border-radius: 15px;
-  animation: fadeInModal 0.5s ease-out;
-}
-
-@keyframes fadeInModal {
-  0% {
-      transform: translateY(-50%);
-      opacity: 0;
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
   }
-  100% {
-      transform: translateY(0);
-      opacity: 1;
+  to {
+    background-position: 200% 0;
   }
 }
 
-.modal-header {
-  background-color: #e60000;
-  color: white;
-  border-radius: 15px 15px 0 0;
-}
-
-.modal-footer button {
-  background-color: #e60000;
-  color: white;
-  border-radius: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.modal-footer button:hover {
-  background-color: #c70000;
-}
-
-/* Media Queries para Responsividad */
-
-/* Pantallas pequeñas (móviles) */
-@media (max-width: 576px) {
-  h2 {
-      font-size: 1.25rem;
-  }
-
-  .login-container {
-      padding: 20px;
-  }
-
-  .login-container img {
-      max-width: 120px;
-      margin-bottom: 15px;
-  }
-
-  .form-control {
-      font-size: 1rem;
-      padding: 0.8rem;
-  }
-
-  .btn-danger {
-      font-size: 1rem;
-      padding: 0.8rem;
-  }
-}
-
-/* Pantallas medianas (tabletas) */
-@media (max-width: 768px) {
-  .login-container {
-      max-width: 90%;
-  }
-
-  h2 {
-      font-size: 1.4rem;
-  }
-
-  .login-container img {
-      max-width: 130px;
-  }
-
-  .form-control {
-      font-size: 1.1rem;
-      padding: 1rem;
-  }
-
-  .btn-danger {
-      font-size: 1.1rem;
-      padding: 1rem;
-  }
-}
-
-/* Pantallas grandes (escritorio) */
-@media (min-width: 1200px) {
-  .login-container {
-      max-width: 400px;
-  }
-
-  h2 {
-      font-size: 1.6rem;
-  }
-
-  .form-control {
-      font-size: 1.2rem;
-  }
-
-  .btn-danger {
-      font-size: 1.2rem;
-  }
-}
-
-/* Para las tablas (en caso de que haya) */
-.table-striped tbody tr:hover {
-  background-color: #f2f2f2;
-}
-
-/* Footer fijo en la parte inferior */
+/* Footer */
 footer {
   position: fixed;
   bottom: 0;
@@ -207,14 +162,23 @@ footer {
   background-color: #f8f9fa;
   padding: 1rem;
   text-align: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsividad del footer */
-@media (max-width: 576px) {
-  footer {
-      font-size: 0.9rem;
-  }
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
 }
-.input-group-text i {
-  font-size: 1.2rem; 
+
+a {
+  color: #333;
+  text-decoration: none; 
+  font-weight: 500; 
+  transition: color 0.3s ease, border-bottom 0.3s ease; 
+}
+
+a:hover {
+  color: #ff0000; 
+  border-bottom: 2px solid #ff0000; 
 }
