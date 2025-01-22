@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Recursos Académicos</title>
+    <title>Estado de Recursos</title>
+    <link rel="icon" href="../../static/img/fondo_aguilas_saber.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="estado_recursos.css" rel="stylesheet">
@@ -56,22 +57,22 @@
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/roles/listado-roles.html" class="nav-link text-white">
-                                    <i class="fas fa-user-shield me-2"></i>Gestionar Rol
+                                    <i class="fas fa-user-shield me-2"></i>Rol
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/roles/gestion-permisos.html" class="nav-link text-white">
-                                    <i class="fas fa-key me-2"></i>Gestionar Permisos
+                                    <i class="fas fa-key me-2"></i>Permisos
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link text-white">
-                                    <i class="fas fa-chart-line me-2"></i>Ver Estado de Recursos
+                                <a href="../../paginas/recursos/estado-recursos.html" class="nav-link active text-white">
+                                    <i class="fas fa-chart-line me-2"></i>Estado de Recursos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../paginas/productos/ingreso-productos.html" class="nav-link text-white">
-                                    <i class="fas fa-arrow-up me-2"></i>Gestión de Ingresos
+                                    <i class="fas fa-arrow-up me-2"></i>Ingresos
                                 </a>
                             </li>
                         </ul>
@@ -204,13 +205,13 @@
         </div>
     </div>
 
-    <!-- Modal de Edición de Recurso -->
+    <!-- Modal de Edición -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Editar Recurso</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editResourceForm">
@@ -220,23 +221,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="editDescription" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="editDescription" required></textarea>
+                        <input type="text" class="form-control" id="editDescription" required>
                     </div>
                     <div class="mb-3">
                         <label for="editCategory" class="form-label">Categoría</label>
-                        <select class="form-select" id="editCategory" required>
-                            <option value="Libros">Libros</option>
-                            <option value="Material Digital">Material Digital</option>
-                            <option value="Equipos">Equipos</option>
-                        </select>
+                        <input type="text" class="form-control" id="editCategory" required>
                     </div>
                     <div class="mb-3">
-                        <label for="addStatus" class="form-label">Estado</label>
-                        <select class="form-select" id="addStatus" required>
-                            <option value="Bueno">Bueno</option>
-                            <option value="Deteriorado">Deteriorado</option>
-                            <option value="Malo">Malo</option>
-                        </select>
+                        <label for="editStatus" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="editStatus" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                 </form>
@@ -253,7 +246,6 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
-
 <script>
     let resources = [
     { id: 1, name: 'Lápiz', description: 'Lápiz de madera', category: 'Material Digital', status: 'Bueno' },
@@ -268,144 +260,149 @@
     { id: 10, name: 'Mochila', description: 'Mochila escolar de tela', category: 'Equipos', status: 'Bueno' }
 ];
 
-    let currentPage = 1;
-    let resourcesPerPage = 10;
-    let currentResourceId = null;
+let currentPage = 1;
+let resourcesPerPage = 10;
+let currentResourceId = null;
 
-    // Función para buscar recursos
-    function searchResources() {
-        const searchValue = document.getElementById("searchInput").value.toLowerCase();
-        renderTable(searchValue);
+// Función para buscar recursos
+function searchResources() {
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
+    renderTable(searchValue);
+}
+
+// Función para renderizar la tabla con los recursos filtrados
+function renderTable(searchQuery = "") {
+    const tableBody = document.getElementById("resourceTableBody");
+    tableBody.innerHTML = "";
+
+    // Filtrar los recursos por el término de búsqueda
+    const filteredResources = resources.filter(resource => {
+        return (
+            resource.name.toLowerCase().includes(searchQuery) ||
+            resource.description.toLowerCase().includes(searchQuery) ||
+            resource.category.toLowerCase().includes(searchQuery) ||
+            resource.status.toLowerCase().includes(searchQuery)
+        );
+    });
+
+    // Mostrar los recursos filtrados por página
+    const startIndex = (currentPage - 1) * resourcesPerPage;
+    const endIndex = startIndex + resourcesPerPage;
+    const pageResources = filteredResources.slice(startIndex, endIndex);
+
+    pageResources.forEach(resource => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${resource.id}</td>
+            <td>${resource.name}</td>
+            <td>${resource.description}</td>
+            <td>${resource.category}</td>
+            <td>${resource.status}</td>
+            <td><i class="fas fa-edit text-primary btn-icon" onclick="openEditModal(${resource.id})"></i></td>
+            <td><i class="fas fa-trash-alt text-danger btn-icon" onclick="openDeleteModal(${resource.id}, '${resource.name}')"></i></td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    renderPagination(filteredResources);
+}
+
+// Función para renderizar la paginación
+function renderPagination(filteredResources) {
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+
+    const pageCount = Math.ceil(filteredResources.length / resourcesPerPage);
+    for (let i = 1; i <= pageCount; i++) {
+        const pageItem = document.createElement("li");
+        pageItem.classList.add("page-item");
+        pageItem.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
+        pagination.appendChild(pageItem);
     }
+}
 
-    // Función para renderizar la tabla con los recursos filtrados
-    function renderTable(searchQuery = "") {
-        const tableBody = document.getElementById("resourceTableBody");
-        tableBody.innerHTML = "";
+// Función para cambiar de página
+function changePage(pageNumber) {
+    currentPage = pageNumber;
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
+    renderTable(searchValue);
+}
 
-        // Filtrar los recursos por el término de búsqueda
-        const filteredResources = resources.filter(resource => {
-            return (
-                resource.name.toLowerCase().includes(searchQuery) ||
-                resource.description.toLowerCase().includes(searchQuery) ||
-                resource.category.toLowerCase().includes(searchQuery) ||
-                resource.status.toLowerCase().includes(searchQuery)
-            );
-        });
+// Función para abrir el modal de eliminar
+function openDeleteModal(id, name) {
+    document.getElementById("resourceNameToDelete").innerText = name;
+    currentResourceId = id;
+    const deleteModal = new bootstrap.Modal(document.getElementById("confirmModal"));
+    deleteModal.show();
+}
 
-        // Mostrar los recursos filtrados por página
-        const startIndex = (currentPage - 1) * resourcesPerPage;
-        const endIndex = startIndex + resourcesPerPage;
-        const pageResources = filteredResources.slice(startIndex, endIndex);
+// Función para eliminar el recurso
+function deleteResource() {
+    resources = resources.filter(resource => resource.id !== currentResourceId);
+    renderTable();
+    const deleteModal = bootstrap.Modal.getInstance(document.getElementById("confirmModal"));
+    deleteModal.hide();
+    const successModal = new bootstrap.Modal(document.getElementById("successModal"));
+    successModal.show();
+}
 
-        pageResources.forEach(resource => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${resource.id}</td>
-                <td>${resource.name}</td>
-                <td>${resource.description}</td>
-                <td>${resource.category}</td>
-                <td>${resource.status}</td>
-                <td><i class="fas fa-edit text-primary btn-icon" onclick="openEditModal(${resource.id})"></i></td>
-                <td><i class="fas fa-trash-alt text-danger btn-icon" onclick="openDeleteModal(${resource.id}, '${resource.name}')"></i></td>
-            `;
-            tableBody.appendChild(row);
-        });
-
-        renderPagination(filteredResources);
-    }
-
-    // Función para renderizar la paginación
-    function renderPagination(filteredResources) {
-        const pagination = document.getElementById("pagination");
-        pagination.innerHTML = "";
-
-        const pageCount = Math.ceil(filteredResources.length / resourcesPerPage);
-        for (let i = 1; i <= pageCount; i++) {
-            const pageItem = document.createElement("li");
-            pageItem.classList.add("page-item");
-            pageItem.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
-            pagination.appendChild(pageItem);
-        }
-    }
-
-    // Función para cambiar de página
-    function changePage(pageNumber) {
-        currentPage = pageNumber;
-        const searchValue = document.getElementById("searchInput").value.toLowerCase();
-        renderTable(searchValue);
-    }
-
-    // Función para abrir el modal de eliminar
-    function openDeleteModal(id, name) {
-        document.getElementById("resourceNameToDelete").innerText = name;
-        currentResourceId = id;
-        const deleteModal = new bootstrap.Modal(document.getElementById("confirmModal"));
-        deleteModal.show();
-    }
-
-    // Función para eliminar el recurso
-    function deleteResource() {
-        resources = resources.filter(resource => resource.id !== currentResourceId);
-        renderTable();
-        const successModal = new bootstrap.Modal(document.getElementById("successModal"));
-        successModal.show();
-    }
-
-    // Función para abrir el modal de editar
+// Función para abrir el modal de editar
 function openEditModal(id) {
     currentResourceId = id;
     const resource = resources.find(resource => resource.id === id);
-    
-    // Asignar los valores al modal
+
+    // Asignar los valores al modal de edición
     document.getElementById("editName").value = resource.name;
     document.getElementById("editDescription").value = resource.description;
     document.getElementById("editCategory").value = resource.category;
-    document.getElementById("addStatus").value = resource.status;
+    document.getElementById("editStatus").value = resource.status;
 
     // Mostrar el modal
     const editModal = new bootstrap.Modal(document.getElementById("editModal"));
     editModal.show();
 }
 
+// Función para agregar un recurso
+document.getElementById("addResourceForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-    // Función para agregar un recurso
-    document.getElementById("addResourceForm").addEventListener("submit", function (event) {
-        event.preventDefault();
+    const newResource = {
+        id: resources.length + 1,
+        name: document.getElementById("addName").value,
+        description: document.getElementById("addDescription").value,
+        category: document.getElementById("addCategory").value,
+        status: document.getElementById("addStatus").value
+    };
 
-        const newResource = {
-            id: resources.length + 1,
-            name: document.getElementById("addName").value,
-            description: document.getElementById("addDescription").value,
-            category: document.getElementById("addCategory").value,
-            status: document.getElementById("addStatus").value
-        };
+    resources.push(newResource);
+    renderTable();
+    const addModal = bootstrap.Modal.getInstance(document.getElementById("addResourceModal"));
+    addModal.hide();
+});
 
-        resources.push(newResource);
-        renderTable();
-        const addModal = new bootstrap.Modal(document.getElementById("addResourceModal"));
-        addModal.hide();
-    });
+// Función para editar un recurso
+document.getElementById("editResourceForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-    // Función para editar un recurso
-    document.getElementById("editResourceForm").addEventListener("submit", function (event) {
-        event.preventDefault();
+    const updatedResource = {
+        id: currentResourceId,
+        name: document.getElementById("editName").value,
+        description: document.getElementById("editDescription").value,
+        category: document.getElementById("editCategory").value,
+        status: document.getElementById("editStatus").value
+    };
 
-        const updatedResource = {
-            id: currentResourceId,
-            name: document.getElementById("editName").value,
-            description: document.getElementById("editDescription").value,
-            category: document.getElementById("editCategory").value,
-            status: document.getElementById("editStatus").value
-        };
-
-        const index = resources.findIndex(resource => resource.id === currentResourceId);
+    const index = resources.findIndex(resource => resource.id === currentResourceId);
+    if (index !== -1) {
         resources[index] = updatedResource;
         renderTable();
-        const editModal = new bootstrap.Modal(document.getElementById("editModal"));
+        const editModal = bootstrap.Modal.getInstance(document.getElementById("editModal"));
         editModal.hide();
-    });
+    }
+});
 
-    // Inicialización de la tabla al cargar la página
+// Inicialización de la tabla al cargar la página
+document.addEventListener("DOMContentLoaded", function () {
     renderTable();
+});
 </script>
