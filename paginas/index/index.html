@@ -13,6 +13,118 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <!-- Incluir CSS externo -->
   <link href="../../static/styles/styles.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 380px;
+      padding: 40px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 0.8s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-container img {
+      max-width: 150px;
+      margin-bottom: 20px;
+      animation: slideIn 1s ease-out;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .form-control {
+      border-radius: 10px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #e60000; 
+      box-shadow: 0 0 0 0.2rem rgba(230, 0, 0, 0.25);
+    }
+
+    .btn-danger {
+      background-color: #e60000; 
+      color: white;
+      border-radius: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-danger:hover {
+      background-color: #c70000; 
+      transform: translateY(-2px);
+    }
+
+    .footer a {
+      color: #e60000; 
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+      color: #c70000; 
+    }
+
+    .modal-content {
+      border-radius: 15px;
+      animation: fadeInModal 0.5s ease-out;
+    }
+
+    @keyframes fadeInModal {
+      0% {
+        transform: translateY(-50%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      background-color: #e60000; 
+      color: white;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .modal-footer button {
+      background-color: #e60000; 
+      color: white;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-footer button:hover {
+      background-color: #c70000; 
+    }
+
+  </style>
 </head>
 <body>
   <div class="container d-flex justify-content-center align-items-center vh-100">
