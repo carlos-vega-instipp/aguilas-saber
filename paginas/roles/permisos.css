@@ -310,6 +310,7 @@ td {
     color: white;
 }
 
+
 .pagination .page-item.active .page-link {
     background-color: transparent !important; 
     border-color: #d6d6d6 !important;        

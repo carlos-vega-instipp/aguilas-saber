@@ -9,6 +9,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .pagination .page-item .page-link {
+        background-color: white;
+        color: #007bff; 
+        border: 1px solid #dee2e6; 
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: white; 
+        color: #007bff; 
+        border: 1px solid #ddd5d5; 
+    }
+
+    .pagination .page-item .page-link:hover {
+        background-color: #f8f9fa; 
+    }
+</style>
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
@@ -335,8 +352,6 @@
     const modal = bootstrap.Modal.getInstance(document.getElementById("addReturnModal"));
     modal.hide();
 }
-
-
 
         renderTable(currentPage);
     </script>

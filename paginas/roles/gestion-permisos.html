@@ -405,7 +405,6 @@ document.getElementById('updatePermissionBtn').addEventListener('click', functio
             selectedRow.cells[4].innerText = assignedBy;
             selectedRow.cells[5].innerText = assignmentDate;
 
-            // Cierra el modal después de guardar
             const modal = bootstrap.Modal.getInstance(document.getElementById('editPermissionModal'));
             modal.hide();
         } else {
@@ -416,7 +415,6 @@ document.getElementById('updatePermissionBtn').addEventListener('click', functio
         errorMessage.classList.remove('d-none'); // Muestra el mensaje de error si los campos no son válidos
     }
 });
-
 
 // Evento para eliminar un permiso
 document.getElementById('permissionTableBody').addEventListener('click', function (e) {
