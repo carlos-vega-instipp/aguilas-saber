@@ -1,26 +1,4 @@
-.card {
-    height: 100%; 
-    border-radius: 10px; 
-    overflow: hidden; 
-}
-
-.card-header {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.card-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-}
-
-.card-body canvas {
-    max-width: 100%;
-    max-height: 100%;
-}
-
+/* Ensure the footer is at the bottom */
 html, body {
     height: 100%;
     margin: 0;
@@ -46,12 +24,16 @@ footer {
 
 /* Sidebar */
 #sidebar {
-    background-color: #343a40;
-    color: #fff;
-    transition: all 0.3s ease;
+    height: 100vh; /* Full height */
+    position: fixed; /* Fixed to the left side */
+    top: 0;
+    left: 0;
+    width: 250px; /* Sidebar width */
+    overflow-y: auto; /* Scroll if too many items */
+    background-color: #343a40; /* Background color */
 }
 
-/* Estilos mejorados para el nav-link */
+/* Improved styles for nav-link */
 #sidebar .nav-link {
     font-size: 16px;
     margin: 10px 0;  
@@ -62,29 +44,65 @@ footer {
     text-decoration: none;
     border-radius: 8px;  
     transition: all 0.3s ease; 
-    font-weight: 500; 
+    font-weight: 500;
 }
 
-/* Efecto de hover */
 #sidebar .nav-link:hover {
-    background-color: #007bff; 
-    color: #fff; 
-    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.2); 
-    transform: translateX(8px); 
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Efecto de hover en los iconos */
-#sidebar .nav-link i {
-    margin-right: 12px;
-    transition: transform 0.3s ease; 
+/* Responsive styles */
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%; /* Full width on small screens */
+        height: auto; /* Auto height */
+        position: relative; /* Relative positioning */
+    }
+
+    .d-flex {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    .flex-grow-1 {
+        margin-top: 20px; /* Add margin to main content */
+    }
 }
 
-/* Iconos aumentan de tamaño al hacer hover */
-#sidebar .nav-link:hover i {
-    transform: scale(1.1); 
+@media (max-width: 576px) {
+    #sidebar .nav-link {
+        font-size: 14px; /* Smaller font size */
+        padding: 10px 12px; /* Smaller padding */
+    }
+
+    footer {
+        padding: 0.5rem 0; /* Smaller padding */
+    }
 }
 
-/* Estilo para el enlace activo */
+/* Card styles */
+.card {
+    height: 100%; /* Ensure cards fill their space */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Prevent overflow */
+}
+
+.card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Ensure same size for all cards */
+}
+
+.card-body canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 #sidebar .nav-link.active {
     background-color: #dc3545; 
     color: white;
