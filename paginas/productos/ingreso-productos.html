@@ -19,6 +19,12 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
+
+                    <a href="../../paginas/pagina_inicio/dashboard.html" class="nav-link text-white">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="../../paginas/pagina_inicio/home.html" class="nav-link text-white">
                         <i class="fas fa-home me-2"></i>Inicio
                     </a>
@@ -98,7 +104,7 @@
                         <option value="20">20 Ingresos</option>
                     </select>
                 </div>
-             
+
                 <div class="input-group w-50">
                     <input type="text" id="searchUsers" class="form-control" placeholder="Buscar Ingresos" aria-label="Buscar usuarios">
                     <button class="btn btn-outline-secondary" type="button" id="searchButton">
@@ -237,7 +243,7 @@
     <script>
     let currentRow = null;
 
-      let currentPage = 1;
+let currentPage = 1;
 const rowsPerPage = 10; // Fijar el número de filas por página
 
 // Función para actualizar la tabla con los productos
